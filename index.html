@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lyrics Finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Lyrics Finder</h1>
+  <p>get the lyrics of your favourite song!</p>
+
+  <form id="lyricsForm">
+
+    <label for="artist">Artist:</label>
+    <input type="text" id="artist" name="artist" required>
+    
+    <label for="title">Song Title:</label>
+    <input type="text" id="title" name="title" required>
+
+    <button type="submit">Get Lyrics</button>
+
+  </form>
+
+  <div id="lyrics"></div>
+  <button id="clear">Clear Lyrics</button>
+  <script src="script.js"></script>
+
+  <footer>
+    <p>Lyrics Finder &copy; 2024</p>
+</footer>
+
+
+</body>
+</html>
