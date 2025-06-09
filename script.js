@@ -17,7 +17,7 @@ form.addEventListener('submit', async (event) => {
 
   // Fetch lyrics using AudD API
   try {
-    const apiKey = 'YOUR_API_KEY_HERE'; // 🔁 Replace with your real key
+    const apiKey = 'f4b7940b986db5c2d06782510369fc0d'; // 🔁 Replace with your real key
     const query = encodeURIComponent(`${title} ${artist}`);
     const response = await fetch(`https://api.audd.io/findLyrics/?q=${query}&api_token=${apiKey}`);
     const data = await response.json();
