@@ -4,31 +4,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearButton = document.getElementById('clear');
   
     // Fetch lyrics when the form is submitted
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault(); // Prevent page reload
-      const artist = document.getElementById('artist').value.trim();
-      const title = document.getElementById('title').value.trim();
-  
-      // Check for empty input
-      if (!artist || !title) {
-        lyricsDiv.innerHTML = `<p class="error">Please enter both artist and title!</p>`;
-        return;
-      }
-  
-      // Fetch data from API
-      try {
-        const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
-        const data = await response.json();
-  
-        if (data.lyrics) {
-          lyricsDiv.textContent = data.lyrics;
-        } else {
-          lyricsDiv.innerHTML = `<p class="error">Lyrics not found for "${title}" by ${artist}.</p>`;
-        }
-      } catch (error) {
-        lyricsDiv.innerHTML = `<p class="error">Error fetching data. Please try again later.</p>`;
-      }
-    });
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const artist = document.getElementById('artist').value.trim();
+  const title = document.getElementById('title').value.trim();
+
+  if (!artist || !title) {
+    lyricsDiv.innerHTML = `<p class="error">Please enter both artist and title!</p>`;
+    return;
+  }
+
+  // Fetch lyrics using AudD API
+  try {
+    const apiKey = 'YOUR_API_KEY_HERE'; // 🔁 Replace with your real key
+    const query = encodeURIComponent(`${title} ${artist}`);
+    const response = await fetch(`https://api.audd.io/findLyrics/?q=${query}&api_token=${apiKey}`);
+    const data = await response.json();
+
+    if (data.result && data.result.length > 0 && data.result[0].lyrics) {
+      lyricsDiv.textContent = data.result[0].lyrics;
+    } else {
+      lyricsDiv.innerHTML = `<p class="error">Lyrics not found for "${title}" by ${artist}.</p>`;
+    }
+  } catch (error) {
+    console.log(error);
+    lyricsDiv.innerHTML = `<p class="error">Error fetching data. Please try again later.</p>`;
+  }
+});
+
   
     // Clear lyrics
     clearButton.addEventListener('click', () => {
